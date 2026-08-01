@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planeter – Rymden</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #242444;
+        color: #e0e0e0;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .navbar {
+        background-color: #171731;
+        border-bottom: 1px solid #2a2a5a;
+        font-size: 1.5rem;
+      }
+
+      .navbar-brand {
+        color: #7e57f4;
+        font-weight: bold;
+        font-size: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .nav-link {
+        color: #c4c4e0;
+      }
+      .nav-link.active {
+        color: #a78bfa !important;
+        font-weight: bold;
+      }
+      .nav-link:hover {
+        color: #a281fe;
+      }
+      .nav-item {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      .page-header {
+        text-align: center;
+        padding: 4rem 1rem 2rem;
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(23, 23, 49, 0.75),
+            rgba(36, 36, 68, 0.95)
+          ),
+          url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400")
+            center no-repeat;
+      }
+      .page-header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+      .page-header h1 span {
+        color: #a78bfa;
+      }
+      .page-header p {
+        color: #b0b0d0;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0.5rem auto;
+      }
+
+      .planet-card {
+        background-color: #1a1a3a;
+        border: 1px solid #2a2a5a;
+        border-radius: 16px;
+        overflow: hidden;
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+        height: 100%;
+      }
+      .planet-card:hover {
+        transform: translateY(-5px);
+        border-color: #a78bfa;
+        box-shadow: 0 10px 20px rgba(167, 139, 250, 0.15);
+      }
+      .planet-img-wrapper {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .planet-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+      .planet-img-wrapper:hover img {
+        transform: scale(1.05);
+      }
+      .planet-body {
+        padding: 1.25rem;
+      }
+      .planet-body h5 {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .planet-body p {
+        color: #a0a0c0;
+        font-size: 0.9rem;
+      }
+      .planet-badge {
+        display: inline-block;
+        background-color: #2e2e5e;
+        color: #a78bfa;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 50px;
+        margin-bottom: 0.5rem;
+      }
+      .planet-facts {
+        list-style: none;
+        padding: 0;
+        margin: 0.75rem 0 0;
+        font-size: 0.85rem;
+        color: #8080b0;
+      }
+      .planet-facts li {
+        padding: 0.2rem 0;
+        border-top: 1px solid #2a2a5a;
+        /*för separering av snabbfakta*/
+      }
+      .planet-facts li span {
+        color: #c0c0e0;
+        float: right;
+      }
+
+      .section-title {
+        color: #8f6ff0;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+      }
+
+      footer {
+        background-color: #141432;
+        border-top: 1px solid #2a2a5a;
+        color: #6060a0;
+        text-align: center;
+        padding: 1.5rem;
+        font-size: 0.9rem;
+        margin-top: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">🌌</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Hem</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Planeter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="svartahal.html">Svarta hål</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-header">
+      <h1>Planeterna i <span>vårt solsystem</span></h1>
+      <p>
+        Från den glödande solen i mitten till den isiga Neptunus längst ut –
+        utforska alla himlakroppar i vårt solsystem.
+      </p>
+    </div>
+
+    <!-- solen-->
+    <section class="container mb-5">
+      <h2 class="section-title">☀️ Solen</h2>
+      <div
+        class="planet-card d-flex flex-column flex-md-row"
+        style="border-color: #f5a623"
+      >
+        <div
+          class="planet-img-wrapper"
+          style="height: auto; min-height: 220px; flex: 0 0 320px"
+          data-bs-toggle="modal"
+          data-bs-target="#planetModal"
+        >
+          <img src="bilder/sun.jpg" alt="Bild på solen" />
+        </div>
+        <div class="planet-body">
+          <span class="planet-badge" style="color: #f5a623">Stjärna</span>
+          <h5>Solen</h5>
+          <p>
+            Solen är centrum i vårt solsystem och en genomsnittlig stjärna. Den
+            består till 73% av väte och 25% av helium. Utan solen skulle inget
+            liv existera på jorden.
+          </p>
+          <ul class="planet-facts">
+            <li>Diameter <span>1 392 700 km</span></li>
+            <li>Avstånd från jorden <span>149,6 miljoner km</span></li>
+            <li>Yttemperatur <span>5 500 °C</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- planeter -->
+    <section class="container pb-5">
+      <h2 class="section-title">🪐 Planeterna</h2>
+      <div class="row g-4">
+        <!-- merkurius -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img src="bilder/mercury.jpg" alt="Bild på Merkurius" />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 1</span>
+              <h5>Merkurius</h5>
+              <p>
+                Den minsta och innersta planeten. Extrema temperaturer – från
+                -180°C till +430°C.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>4 879 km</span></li>
+                <li>Dygn <span>59 jorddygn</span></li>
+                <li>År <span>88 jorddagar</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- venus -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img src="bilder/venus.jpg" alt="Bild på Venus" />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 2</span>
+              <h5>Venus</h5>
+              <p>
+                Den hetaste planeten trots att den inte är närmast solen. Täckt
+                av tjocka giftiga moln.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>12 104 km</span></li>
+                <li>Yttemperatur <span>465 °C</span></li>
+                <li>År <span>225 jorddagar</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- jorden -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card" style="border-color: #4a9eff">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img src="bilder/earth.jpg" alt="Bild på Jorden" />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge" style="color: #4a9eff">Planet 3</span>
+              <h5>Jorden 🌍</h5>
+              <p>
+                Vår hemplanet – den enda kända planeten med liv. 71% av ytan
+                täcks av vatten.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>12 742 km</span></li>
+                <li>Månar <span>1 (Månen)</span></li>
+                <li>År <span>365 dagar</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- mars -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img
+                src="bilder/planet-mars-med-isolerad-polarkyla-138767026.webp"
+                alt="Bild på Mars"
+              />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 4</span>
+              <h5>Mars</h5>
+              <p>
+                Den röda planeten. Hem till solsystemets högsta berg – Olympus
+                Mons (21 km högt).
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>6 779 km</span></li>
+                <li>Månar <span>2 (Phobos, Deimos)</span></li>
+                <li>År <span>687 jorddagar</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- jupiter -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img src="bilder/Jupiter.jpg" alt="Bild på Jupiter" />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 5</span>
+              <h5>Jupiter</h5>
+              <p>
+                Den största planeten – så stor att alla andra planeter får plats
+                inuti den. En gasjätte.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>139 820 km</span></li>
+                <li>Månar <span>95 kända</span></li>
+                <li>År <span>12 jordår</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- saturnus -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img src="bilder/saturnus.jpg" alt="Bild på Saturnus" />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 6</span>
+              <h5>Saturnus</h5>
+              <p>
+                Känd för sina spektakulära ringar av is och sten. Så lätt att
+                den skulle flyta på vatten.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>116 460 km</span></li>
+                <li>Månar <span>146 kända</span></li>
+                <li>År <span>29 jordår</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- uranus -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img src="bilder/uranus.avif" alt="Bild på Uranus" />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 7</span>
+              <h5>Uranus</h5>
+              <p>
+                Roterar på sidan – dess axel lutar 98°. En isjätte med en
+                blågrön färg av metan.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>50 724 km</span></li>
+                <li>Månar <span>28 kända</span></li>
+                <li>År <span>84 jordår</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- neptunus -->
+        <div class="col-md-6 col-lg-3">
+          <div class="planet-card">
+            <div
+              class="planet-img-wrapper"
+              data-bs-toggle="modal"
+              data-bs-target="#planetModal"
+            >
+              <img
+                src="bilder/neptun-h-dsh-5ftncaumuidwrraq-M9c1rxXpNszQJVqNsNnDWA.jpg"
+                alt="Bild på Neptunus"
+              />
+            </div>
+            <div class="planet-body">
+              <span class="planet-badge">Planet 8</span>
+              <h5>Neptunus</h5>
+              <p>
+                Den yttersta planeten. Har de starkaste vindarna i solsystemet –
+                upp till 2 100 km/h.
+              </p>
+              <ul class="planet-facts">
+                <li>Diameter <span>49 244 km</span></li>
+                <li>Månar <span>16 kända</span></li>
+                <li>År <span>165 jordår</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div
+      class="modal fade"
+      id="planetModal"
+      tabindex="-1"
+      aria-labelledby="planetModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header border-secondary">
+            <h5 class="modal-title" id="planetModalLabel">Planetbild</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Stäng"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="modalPlanetBild" src="" alt="" class="img-fluid rounded" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        2026 Rymden – utforska universum | Källor:
+        <a href="https://www.nasa.gov" style="color: #a78bfa">NASA</a>
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const planetModal = document.getElementById("planetModal");
+
+      planetModal.addEventListener("show.bs.modal", function (event) {
+        const bildWrapper = event.relatedTarget;
+        const bild = bildWrapper.querySelector("img");
+
+        const modalBild = document.getElementById("modalPlanetBild");
+        const modalTitel = document.getElementById("planetModalLabel");
+
+        modalBild.src = bild.src;
+        modalBild.alt = bild.alt;
+        modalTitel.textContent = bild.alt;
+      });
+    </script>
+  </body>
+</html>
